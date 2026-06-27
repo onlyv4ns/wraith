@@ -31,7 +31,7 @@ Wraith removes all of these signals.
 ## Install
 
 ```bash
-go get github.com/yourusername/wraith
+go get github.com/onlyv4ns/wraith
 ```
 
 ## Usage
@@ -45,7 +45,7 @@ import (
     "fmt"
     "log"
 
-    wraith "github.com/yourusername/wraith"
+    wraith "github.com/onlyv4ns/wraith"
 )
 
 func main() {
