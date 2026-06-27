@@ -7,9 +7,9 @@ import (
 	"github.com/go-rod/rod"
 	"github.com/go-rod/rod/lib/launcher"
 	"github.com/go-rod/rod/lib/proto"
-	"github.com/yourusername/wraith/internal/chrome"
-	"github.com/yourusername/wraith/internal/stealth"
-	"github.com/yourusername/wraith/internal/transport"
+	"github.com/onlyv4ns/wraith/internal/chrome"
+	"github.com/onlyv4ns/wraith/internal/stealth"
+	"github.com/onlyv4ns/wraith/internal/transport"
 )
 
 type Browser struct {

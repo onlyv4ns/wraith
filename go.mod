@@ -1,4 +1,4 @@
-module github.com/yourusername/wraith
+module github.com/onlyv4ns/wraith
 
 go 1.25.0
 

@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	wraith "github.com/yourusername/wraith"
+	wraith "github.com/onlyv4ns/wraith"
 )
 
 func main() {
