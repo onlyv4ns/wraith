@@ -64,6 +64,7 @@ func New(opts Options) (*Browser, error) {
 
 	l := launcher.New().
 		Bin(chromePath).
+		Leakless(false).
 		Headless(o.Headless).
 		Delete("disable-background-networking").
 		Delete("disable-background-timer-throttling").

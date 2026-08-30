@@ -2,6 +2,7 @@ package chrome
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"regexp"
 	"runtime"
@@ -11,7 +12,13 @@ import (
 var versionRe = regexp.MustCompile(`(\d+\.\d+\.\d+\.\d+)`)
 
 func Version(binPath string) (string, error) {
-	out, err := exec.Command(binPath, "--version").Output()
+	profile, err := os.MkdirTemp("", "wraith-version-")
+	if err != nil {
+		return "", fmt.Errorf("create temporary Chrome profile: %w", err)
+	}
+	defer os.RemoveAll(profile)
+
+	out, err := exec.Command(binPath, "--version", "--no-startup-window", "--no-first-run", "--no-default-browser-check", "--user-data-dir="+profile).Output()
 	if err != nil {
 		return "", fmt.Errorf("chrome --version: %w", err)
 	}
