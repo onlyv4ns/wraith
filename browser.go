@@ -88,7 +88,7 @@ func New(opts Options) (*Browser, error) {
 		Delete("use-mock-keychain").
 		Set("disable-blink-features", "AutomationControlled").
 		Set("exclude-switches", "enable-automation").
-		Set("start-maximized", "").
+		Set("start-maximized", "true").
 		Set("user-agent", ua).
 		Set("no-sandbox", "").
 		Set("ozone-platform", "x11")
@@ -105,7 +105,7 @@ func New(opts Options) (*Browser, error) {
 		return nil, fmt.Errorf("launch chrome: %w", err)
 	}
 
-	browser := rod.New().ControlURL(url)
+	browser := rod.New().ControlURL(url).NoDefaultDevice()
 	if err := browser.Connect(); err != nil {
 		return nil, fmt.Errorf("connect to chrome: %w", err)
 	}
@@ -117,6 +117,11 @@ func (b *Browser) NewPage() (*Page, error) {
 	p, err := b.rod.Page(proto.TargetCreateTarget{URL: "about:blank"})
 	if err != nil {
 		return nil, err
+	}
+	if !b.opts.Headless {
+		if err := p.SetWindow(&proto.BrowserBounds{WindowState: proto.BrowserWindowStateMaximized}); err != nil {
+			return nil, fmt.Errorf("maximize window: %w", err)
+		}
 	}
 
 	if err := stealth.InjectOnNewDocument(p); err != nil {
